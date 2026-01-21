@@ -1,4 +1,4 @@
-## Interface: 110207, 50503, 40402, 30405
+## Interface: 120000, 50503, 40402, 30405
 ## Title: Chatty Little NPC: Wrath of the Lich King
 ## Notes: This is a quest voiceover pack for Chatty Little NPC addon.
 ## Author: Tuubby
