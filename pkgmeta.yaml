@@ -1,0 +1,8 @@
+package-as: ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers
+ignore:
+  - release.py
+  - README.md
+  - .vscode
+  - .github
+  - .venv
+  - .luarc.json
