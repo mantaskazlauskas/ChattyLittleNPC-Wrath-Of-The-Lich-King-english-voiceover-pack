@@ -1,7 +1,7 @@
----@class ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers
-local ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers = _G["ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers"]
+---@class ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers
+local ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers = _G["ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers"]
 
-ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers.Voiceovers = {
+ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers.Voiceovers = {
     '10032_Desc.ogg',
     '10787_Desc.ogg',
     '11153_Comp.ogg',
@@ -6680,7 +6680,7 @@ ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers.Voiceovers = {
     '9613_Desc.ogg',
 }
 
-ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers.VoiceoverDurations = {
+ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers.VoiceoverDurations = {
     ["10032_Desc.ogg"] = 34.98,
     ["10787_Desc.ogg"] = 27.34,
     ["11153_Comp.ogg"] = 16.71,

@@ -1,6 +1,8 @@
-package-as: ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers
+package-as: ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers
 ignore:
   - release.py
+  - deploy.py
+  - generate_voiceovers_list.py
   - README.md
   - .vscode
   - .github

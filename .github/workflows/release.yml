@@ -9,17 +9,14 @@ permissions:
 
 jobs:
   build:
+    # Only the repository owner may publish packs; releases by anyone else build nothing.
+    if: github.actor == github.repository_owner
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Debug zip file name
-        run: |
-          echo "Expected zip: ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers-${{ github.ref_name }}.zip"
-          ls -lh
-                    
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -28,19 +25,25 @@ jobs:
       - name: Install dependencies
         run: pip install mutagen
 
-      - name: Generate VoiceoversList.lua
+      - name: Generate VoiceoversList.lua for every locale
+        run: python generate_voiceovers_list.py
+
+      # One ZIP per addon folder (one folder per locale), e.g.
+      # ChattyLittleNpc_Wrath_of_the_Lich_King_enUS_voiceovers-v3.2.5.zip and ChattyLittleNpc_Wrath_of_the_Lich_King_deDE_voiceovers-v3.2.5.zip
+      - name: Create Addon ZIPs
         run: |
-          cd ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers
-          python generate_voicovers_list_file.py
+          mkdir dist
+          for dir in */; do
+            name="${dir%/}"
+            [ -f "$name/$name.toc" ] || continue
+            zip -r "dist/$name-${{ github.ref_name }}.zip" "$name" -x "$name/.vscode/*"
+          done
+          ls -lh dist
+          [ -n "$(ls dist)" ] || { echo "No addon folders found"; exit 1; }
 
-
-      - name: Create Addon ZIP
-        run: |
-          zip -r "ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers-${{ github.ref_name }}.zip" ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers
-
-      - name: Upload ZIP to GitHub Release
+      - name: Upload ZIPs to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: "ChattyLittleNpc_Wrath_of_the_Lich_King_voiceovers-${{ github.ref_name }}.zip"
+          files: dist/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
